@@ -16,3 +16,4 @@ resend==0.8.0
 six==1.16.0
 urllib3==2.2.1
 Werkzeug==3.0.2
+gunicorn==22.0.0
