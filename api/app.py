@@ -3,7 +3,6 @@ from flask import request
 from flask_restful import Resource
 import resend
 
-
 @app.route("/")
 def home():
     return "Hello World!"
@@ -29,5 +28,3 @@ class SendEmail(Resource):
 
 api.add_resource(SendEmail, "/email")
 
-if __name__ == "__main__":
-    app.run()
