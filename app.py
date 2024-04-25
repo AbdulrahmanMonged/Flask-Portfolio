@@ -15,7 +15,7 @@ class SendEmail(Resource):
             params = {
                 "from": "Your own Portfolio <onboarding@resend.dev>",
                 "to": email,
-                "subject": data["subject"],
+                "subject": data["subject"]["value"],
                 "html": "<p>Email: {0}</p><p>Subject: {2}</p><p>Message:</p><p style='white-space: pre-wrap;'>{1}</p>".format(
                     data["email"]["value"], data["message"]["value"], data["subject"]["value"]
                 ),
