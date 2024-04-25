@@ -63,6 +63,7 @@ class SendEmail(Resource):
             resend.Emails.send(params)
             return "Sent Successfully!", 201
         except Exception as e:
+            print(e)
             return "Error occured while validation Data", 400
 
 
