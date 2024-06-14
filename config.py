@@ -4,6 +4,7 @@ from flask_cors import CORS
 import resend
 import os
 
+URI = os.environ["URI"]
 app = Flask(__name__)
 api = Api(app)
 resend.api_key = os.environ["RESEND_API_KEY"]

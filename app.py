@@ -1,12 +1,25 @@
-from config import app, api, email
+from config import app, api, email, URI
 from flask import request
 from flask_restful import Resource
 import resend
-
+import psycopg
+import asyncio
+import json
+import datetime
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 @app.route("/")
 def home():
     return "Hello World!"
 
+
+async def get_from_db():
+    async with await psycopg.AsyncConnection.connect(URI) as db:
+        async with db.cursor() as cursor:
+            await cursor.execute(
+                    "SELECT * FROM OPERATIONS"
+                )
+            users = await cursor.fetchall()
+            return [list(map(str, user)) for user in users]
 
 class SendEmail(Resource):
     def post(self):
@@ -26,6 +39,13 @@ class SendEmail(Resource):
             print(e)
             return "Error occured while validation Data", 400
 
-
+class Database(Resource):
+    def get(self):
+        try:
+            responses = asyncio.run(get_from_db())
+            return responses, 200
+        except Exception as e:
+            print(e)
+            
 api.add_resource(SendEmail, "/email")
-
+api.add_resource(Database, "/admin/db")
