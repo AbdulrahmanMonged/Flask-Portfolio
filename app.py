@@ -6,7 +6,7 @@ import psycopg
 import asyncio
 import json
 import datetime
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+# asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 @app.route("/")
 def home():
     return "Hello World!"
