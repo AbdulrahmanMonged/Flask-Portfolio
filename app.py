@@ -43,7 +43,7 @@ class Database(Resource):
     def get(self):
         try:
             responses = asyncio.run(get_from_db())
-            return responses, 200
+            return responses[::-1], 200
         except Exception as e:
             print(e)
             
