@@ -43,6 +43,8 @@ class Database(Resource):
     def get(self):
         try:
             responses = asyncio.run(get_from_db())
+            for i in range(len(responses)):
+                responses[-1+i][0] = i + 1
             return responses[::-1], 200
         except Exception as e:
             print(e)
