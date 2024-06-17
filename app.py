@@ -4,8 +4,6 @@ from flask_restful import Resource
 import resend
 import psycopg
 import asyncio
-import json
-import datetime
 # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 @app.route("/")
 def home():
@@ -43,8 +41,8 @@ class Database(Resource):
     def get(self):
         try:
             responses = asyncio.run(get_from_db())
-            for i in range(len(responses)):
-                responses[-1+i][0] = i + 1
+            for i in range(1, len(responses) + 1):
+                responses[i*-1][0] = i
             return responses[::-1], 200
         except Exception as e:
             print(e)
