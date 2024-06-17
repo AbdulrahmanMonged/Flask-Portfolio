@@ -9,6 +9,8 @@ import asyncio
 def home():
     return "Hello World!"
 
+def convert_to_str(data):
+    return str(data) if data else ""
 
 async def get_from_db():
     async with await psycopg.AsyncConnection.connect(URI) as db:
@@ -17,7 +19,7 @@ async def get_from_db():
                     "SELECT * FROM OPERATIONS"
                 )
             users = await cursor.fetchall()
-            return [list(map(str, user)) for user in users]
+            return [list(map(convert_to_str, user)) for user in users]
 
 class SendEmail(Resource):
     def post(self):
