@@ -4,12 +4,15 @@ from flask_restful import Resource
 import resend
 import psycopg
 import asyncio
+from datetime import datetime
 # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 @app.route("/")
 def home():
     return "Hello World!"
 
 def convert_to_str(data):
+    if isinstance(data, datetime):
+        return data.strftime("%Y/%m/%d %H:%M:%S")
     return str(data) if data else ""
 
 async def get_from_db():
