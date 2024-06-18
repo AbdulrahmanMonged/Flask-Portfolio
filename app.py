@@ -19,7 +19,7 @@ async def get_from_db():
     async with await psycopg.AsyncConnection.connect(URI) as db:
         async with db.cursor() as cursor:
             await cursor.execute(
-                    "SELECT * FROM OPERATIONS"
+                    "SELECT * FROM OPERATIONS ORDER BY program_login_time"
                 )
             users = await cursor.fetchall()
             return [list(map(convert_to_str, user)) for user in users]
